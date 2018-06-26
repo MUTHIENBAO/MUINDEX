@@ -1,0 +1,26 @@
+.load-content {
+	background: #111;
+	border: 1px solid #400; 
+	color: #a97;
+	width: 600px !important;
+	padding: 10px;
+}
+.load-content ul li {
+	height: 30px;
+	border-bottom: 1px solid #f50;
+	padding: 5px;
+}
+.load-content a {
+	font-weight: bold;
+	color: #f50;
+}
+.load-title {
+	width: 450px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-flex;
+}
+.load-time {
+	float: right;
+}

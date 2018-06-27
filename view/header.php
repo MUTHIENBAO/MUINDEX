@@ -16,12 +16,80 @@
 	/>
 	<meta property="og:type" content="website" />
 	<link href="style.css" rel="stylesheet" media="screen" />
-	<link href="src/style.css" rel="stylesheet" media="screen" />
+	<!--replace below style -->
+	<style>
+		.load-content {
+			background: #111;
+			border: 1px solid #400; 
+			color: #a97;
+			width: 600px !important;
+			padding: 10px;
+		}
+		.load-content ul li {
+			height: 30px;
+			border-bottom: 1px solid #f50;
+			padding: 5px;
+		}
+		.load-content a {
+			font-weight: bold;
+			color: #f50;
+		}
+		.load-title {
+			width: 450px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: inline-flex;
+		}
+		.load-time {
+			float: right;
+		}
+		.load-tab {
+			width: 600px !important;
+		}
+		.clear-float {
+			clear: both;
+		}
+		.aside-menu {
+			text-shadow: rgba(255, 255, 255, 0.34902) 0px 1px 0px;
+		}
+		.aside-list {
+			border-color: rgba(255, 255, 255, 0.35);
+		}
+		.inline {
+			display: inline;
+		}
+		.main-banner {
+			margin-top: 22px;
+			margin-bottom: 10px;
+			position: relative;
+		}
+		.pre-load {
+			height: 22px;
+		}
+		.arrow {
+			position: absolute;
+			width: 100px;
+			height: 200px;
+			background: #aaa;
+			opacity: 0.5;
+		}
+		.next-arrow {
+			right: 10px;
+		}
+		.previous-arrow {
+			left: 10px;
+		}
+	</style>
+	<!--<link href="src/style.css" rel="stylesheet" media="screen" />-->
 	<style>
 		.wrapper-out .wrapper {
 			background: url(imgs/bg_header.jpg) center top no-repeat;
 			position: relative;
 		}
+		.wrapper-out{
+			background:url(imgs/footer.jpg) center bottom no-repeat;
+			padding-bottom: 100px;}
 	</style>
 </head>
 <body>
@@ -47,25 +115,25 @@
 							<a href="#" class="main-nav__item-tip" title="Cẩm nang">Cẩm nang</a>
 							<ul>
 								<li>
-									<a href="#" title="Giới Thiệu">Giới Thiệu</a>
+									<a href="#main" title="Giới Thiệu" v-on:click="gotoPost(1)">Giới Thiệu</a>
 								</li>
 								<li>
-									<a href="cam-nang/boi-canh.html" title="Bối cảnh">Bối cảnh</a>
+									<a href="#main" title="Bối cảnh" v-on:click="gotoPost(2)">Bối cảnh</a>
 								</li>
 								<li>
-									<a href="cam-nang/nhan-vat.html" title="Nhân Vật">Nhân Vật</a>
+									<a href="#main" title="Nhân Vật" v-on:click="gotoCharacter">Nhân Vật</a>
 								</li>
 								<li>
-									<a href="#" title="Nhân Vật">Hướng dẫn</a>
+									<a href="#main" title="Nhân Vật" v-on:click="gotoInstruction">Hướng dẫn</a>
 								</li>
 								<li>
-									<a href="cam-nang/tinh-nang-co-ban.html" title="Tính Năng Cơ Bản">Tính Năng Cơ Bản</a>
+									<a href="#main" title="Tính Năng Cơ Bản" v-on:click="gotoFunction">Tính Năng Cơ Bản</a>
 								</li>
 								<li>
-									<a href="cam-nang/su-dung-giftcode.html" title="Sử dụng giftcode">Sử dụng GiftCode</a>
+									<a href="#main" title="Sử dụng giftcode">Sử dụng GiftCode</a>
 								</li>
 								<li>
-									<a href="cam-nang/tai-game.html" title="Tải game">Tải game</a>
+									<a href="#main" title="Tải game">Tải game</a>
 								</li>
 							</ul>
 						</li>
@@ -81,7 +149,7 @@
 							</ul>
 						</li>
 						<li class="" id="">
-							<a data-active-path="" href="#" class="main-nav__item-support" title="Hỗ Trợ" target="_blank"></a>
+							<a data-active-path="" href="#main" class="main-nav__item-support" title="Hỗ Trợ" target="_blank"></a>
 						</li>
 					</ul>
 				</nav>

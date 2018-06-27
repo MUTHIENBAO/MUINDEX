@@ -24,3 +24,22 @@
 .load-time {
 	float: right;
 }
+.load-tab {
+	width: 600px !important;
+}
+.clear-float {
+	clear: both;
+}
+.aside-menu {
+	text-shadow: rgba(255, 255, 255, 0.34902) 0px 1px 0px;
+}
+.aside-list {
+	border-color: rgba(255, 255, 255, 0.35);
+}
+.inline {
+	display: inline;
+}
+.main-banner {
+	margin-top: 22px;
+	margin-bottom: 10px;
+}

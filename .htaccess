@@ -1,0 +1,10 @@
+DirectoryIndex index.php
+#IndexIgnore *
+#RewriteEngine On 
+#RewriteBase / 
+### Test for access to includes directory
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /includes/ .*$ [NC] 
+### Test that file requested has php extension 
+#RewriteCond %{REQUEST_FILENAME} ^.+\.php$ 
+### Forbid Access 
+#RewriteRule .* - [F,NS,L]

@@ -1,4 +1,4 @@
-DirectoryIndex index.php
+DirectoryIndex index.html
 #IndexIgnore *
 #RewriteEngine On 
 #RewriteBase / 

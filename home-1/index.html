@@ -63,7 +63,7 @@
                   <ul>
                     <li><a title="Giới thiệu">Giới thiệu</a> </li>
                     <li class="has-sub" rel="char">
-                      <a class="menu-text" title="Nhân vật">
+                      <a class="menu-text" rel="char" title="Nhân vật">
                         Nhân vật
                         <span class="holder menu-style"></span>
                         <span class="holder menu-style"></span>
@@ -81,7 +81,7 @@
                     </li>
                     <li><a title="Tin Tức" class="menu-text">Tin Tức</a>                    </li>
                     <li><a title="Sự Kiện" class="menu-text">Sự Kiện</a> </li>
-                    <li class="has-sub" rel="intro"><a class="menu-text" title="Hướng dẫn">
+                    <li class="has-sub" rel="intro"><a class="menu-text" rel="intro" title="Hướng dẫn">
                       Hướng dẫn
                       <span class="holder menu-style"></span>
                       <span class="holder menu-style"></span>
@@ -126,7 +126,7 @@
             <!-- begin block banner-event-->
             <div v-if="curr_view == 'main'">
               <div v-if="loads[curr_view]">
-                <img src="imgs/loading.gif"/>
+                <loading></loading>
               </div>
               <div v-if="!loads[curr_view]">
                   <div id="banner-event">
@@ -138,23 +138,81 @@
                         <li><a><img src="imgs/chisothuc.jpg" alt="Chỉ Số Thực" width="670" height="200" /></a></li>
                       </ul>
                       <div class="jcarousel-pagination banner-event__control">
-                        <a class="active slide slide-0" rel="0">1</a>
-                        <a class="slide slide-1" rel="1">2</a>
-                        <a class="slide slide-2" rel="2">3</a>
-                        <a class="slide slide-3" rel="3">4</a>
-                        <a class="slide slide-4" rel="4">5</a>
+                        <a href="#banner-event" class="active slide slide-0" rel="0">1</a>
+                        <a href="#banner-event" class="slide slide-1" rel="1">2</a>
+                        <a href="#banner-event" class="slide slide-2" rel="2">3</a>
+                        <a href="#banner-event" class="slide slide-3" rel="3">4</a>
+                        <a href="#banner-event" class="slide slide-4" rel="4">5</a>
                       </div>
                     </div>
                     <div class="posts">
                       <ul class="tabs"> 
-                        <li class="active" rel="tab1">Tin tức</li>
-                        <li rel="tab2">Sự kiện</li>
+                        <li class="active" rel="tab1" v-on:click="loadData('tab_new')">Tin tức</li>
+                        <li rel="tab2" v-on:click="loadData('tab_event')">Sự kiện</li>
                       </ul>
                       <div id="tab1" class="tab_content">
-                        1
+                        <div v-if="loads['tab_new']">
+                          <loading></loading>
+                        </div>
+                        <div v-if="!loads['tab_new'] && datas['tab_new']">
+                            <ul v-if="datas['tab_new'].length">
+                                <li class="post-item" v-for="(data, index) in datas['tab_new']">
+                                  <!--first feed-->
+                              <div v-if="index === 0">
+                                  <a href="#main" class="posts__post-title first" v-on:click="gotoPost(data.id)">
+                                    <p>{{data.title}}</p>
+                                  </a>
+                                  <a href="#main" class="posts__post-image" v-on:click="gotoPost(data.id)">
+                                    <img v-bind:src="data.image" width="138" height="86">
+                                  </a>
+                                  <a href="#main" class="posts__post-intro" target="_blank" v-html="data.describe"></a>                                      
+                                  <p>{{data.time}}</p>
+                                </div>
+                                  <!--other feed-->
+                                  <div v-if="index > 0">
+                                    <a href="#main" class="posts__post-title" v-on:click="gotoPost(data.id)">
+                                      <p>{{data.title}}</p>
+                                    </a>
+                                    <p class="right">{{data.time}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                              <p v-if="!datas['tab_new'].length">
+                                Không có bài viết nào
+                              </p>
+                        </div>
                       </div><!-- #tab1 -->
                       <div id="tab2" class="tab_content">
-                        2
+                        <div v-if="loads['tab_event']">
+                          <loading></loading>
+                        </div>
+                        <div v-if="!loads['tab_event'] && datas['tab_event']">
+                          <ul v-if="datas['tab_event'].length">
+                            <li class="tab-post-item" v-for="(data, index) in datas['tab_event']">
+                              <!--first feed-->
+                              <div v-if="index === 0">
+                                <a href="#main" class="posts__post-title first" v-on:click="gotoPost(data.id)">
+                                  <p>{{data.title}}</p>
+                                </a>
+                                <a href="#main" class="posts__post-image" v-on:click="gotoPost(data.id)">
+                                  <img v-bind:src="data.image" width="138" height="86">
+                                </a>
+                                <a href="#main" class="posts__post-intro" target="_blank" v-html="data.describe"></a>                                      
+                                <p>{{data.time}}</p>
+                              </div>
+                              <!--other feed-->
+                              <div v-if="index > 0">
+                                <a href="#main" class="posts__post-title" v-on:click="gotoPost(data.id)">
+                                  <p>{{data.title}}</p>
+                                </a>
+                                <p class="right">{{data.time}}</p>
+                              </div>
+                            </li>
+                          </ul>
+                          <p v-if="!datas['tab_event'].length">
+                            Không có bài viết nào
+                          </p>
+                        </div>
                       </div>
                       <a class="posts__view-all" id="posts__view-all" title="Xem thêm">Xem thêm</a>
                     </div>
@@ -218,6 +276,10 @@
     <script type="text/javascript" src="js/vue.js"></script>
     
   <script>
+      var host = "http://localhost:8080/MUINDEX/model/get_data.php";
+      Vue.component("loading", {
+        template: `<img class="loading" src="imgs/loading.gif">`
+      })
       new Vue({
         el: "#app",
         data: {
@@ -225,15 +287,15 @@
           views: ["main", "topic"],
           loads: {
             "main": false,
-            "tab1": false,
-            "tab2": false,
+            "tab_new": false,
+            "tab_event": false,
             "topic": false
           },
           datas: {
             "main": null,
             "topic": null,
-            "tab1": null,
-            "tab2": null
+            "tab_new": null,
+            "tab_event": null
           }
         },
         methods: {
@@ -262,13 +324,18 @@
               that.datas[view_name] = response;
             })*/
           },
-          loadTab: function() {
+          loadData: function(data_name) {
             var that = this;
             var x = window.location.href;
-            var Y = x.slice(x.indexOf("/", 8) + 1, -1);
+            var y = x.slice(x.indexOf("/", 8) + 1, -1);
             var z = y.split("/");
-            that.loadUrl().then(response => {
-
+            that.loads[data_name] = true;
+            that.loadUrl(host + "?type=" + data_name).then(response => {
+              console.log(host + "?type=" + data_name);
+              var data = JSON.parse(response);
+              console.log(data);
+              that.datas[data_name] = data;
+              that.loads[data_name] = false;
             }) 
           },
           loadUrl: function(url) {
@@ -285,6 +352,9 @@
               }, 1000)
             })
           }
+        },
+        created: function() {
+          this.loadData("tab_new");
         }
       })
     </script>
@@ -304,13 +374,13 @@
           });          
         }
         function onMenuClick() {
-          $(".has-sub").click(function () {
+          $(".menu-text").click(function () {            
             var select_menu = $(this).attr("rel");
             $("#" + select_menu).slideToggle("slow");
           })
         }
         function onCharacterHover() {
-          $(".char-control li").hover(function () {
+          $(".char-control li").mouseover(function () {            
             $(".char li").removeClass("ActiveBanner");
             var activeTab = $(this).attr("rel");
             $("." + activeTab).addClass("ActiveBanner");

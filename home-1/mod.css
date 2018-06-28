@@ -8,3 +8,44 @@
 .menu-style {
 	border-color: rgba(255, 255, 255, 0.35);
 }
+.loading {
+	float: right;
+	width: auto;
+	height: 32px;
+	margin-top: 10px;
+}
+.posts__post-intro {
+	width: 260px;
+    float: right;
+    margin-left: 10px;
+}
+.posts__post-title p {
+	display: inline-block;
+	width: 260px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #cb5000;
+	font-weight: bold;
+	line-height: 30px;
+}
+.posts__post-title.first p {
+	width: 400px;
+}
+.tab_content div ul li{
+	border-bottom: 1px solid;
+}
+/*
+.tab_content:not(.first) div ul li div::before{
+	content: "-";
+	color: red;
+	font-style: italic;
+}
+*/
+.right {
+	float: right;
+	margin-top: 4px;
+}
+.tab-post-item {
+	max-height: 155px;
+}
